@@ -15,6 +15,12 @@ st.set_page_config(
 st.markdown("""
     <style>
     .stMetric { background-color: #ffffff; padding: 15px; border-radius: 10px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+    footer {visibility: hidden;}
+    .footer-text {
+        text-align: center;
+        color: #9ea0a4;
+        font-size: 0.9em;
+    }
     </style>
     """, unsafe_allow_html=True)
 
@@ -58,7 +64,6 @@ st.progress(ram_usage / 100, text="Ocupación de Memoria RAM")
 # --- SECCIÓN 2: GESTIÓN DE ARCHIVOS (SUBIDA Y BAJADA) ---
 st.header("📁 Gestión de Archivos")
 
-# Pestañas para organizar la interfaz
 tab1, tab2 = st.tabs(["📂 Explorador / Descargas", "📤 Subir al Servidor"])
 
 ruta_actual = os.getcwd()
@@ -97,7 +102,6 @@ with tab2:
             with open(os.path.join(ruta_actual, archivo_subido.name), "wb") as f:
                 f.write(archivo_subido.getbuffer())
             st.success(f"✅ ¡Archivo '{archivo_subido.name}' guardado con éxito!")
-            # Botón para refrescar la lista
             if st.button("Actualizar lista de archivos"):
                 st.rerun()
         except Exception as e:
@@ -106,3 +110,17 @@ with tab2:
 # --- SECCIÓN 3: LOGS ---
 st.markdown("---")
 st.code(f"Estado: Activo\nIP de acceso: {ip_actual}\nFiltro APK: {'ON' if bloqueo_seguridad else 'OFF'}")
+
+# --- PIE DE PÁGINA (FOOTER) ---
+st.markdown("<br><br>", unsafe_allow_html=True) # Doble separación
+st.markdown("---") # Barra horizontal
+st.markdown(
+    """
+    <div class='footer-text'>
+        Desarrollado por <b>Jose Luis Asenjo</b><br>
+        Esta app permite la gestión remota de archivos entre dispositivos.<br><br>
+        Para cualquier duda: <a href='mailto:asenjo.jose@hotmail.com'>asenjo.jose@hotmail.com</a>
+    </div>
+    """, 
+    unsafe_allow_html=True
+)
