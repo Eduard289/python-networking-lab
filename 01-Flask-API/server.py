@@ -1,28 +1,20 @@
-import http.server
-import socketserver
-import socket
+from flask import Flask, jsonify
 
-PORT = 8000
+app = Flask(__name__)
 
-def obtener_ip_local():
-    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-    try:
-        s.connect(('8.8.8.8', 1))
-        ip = s.getsockname()[0]
-    except Exception:
-        ip = '127.0.0.1'
-    finally:
-        s.close()
-    return ip
+@app.route('/')
+def index():
+    return "Servidor API Activo. Sistema de comunicacion funcionando."
 
-Handler = http.server.SimpleHTTPRequestHandler
-ip_actual = obtener_ip_local()
+@app.route('/status')
+def get_status():
+    # Simulamos datos de estado
+    return jsonify({
+        "status": "online",
+        "buffer": "24MB",
+        "mensaje": "Conexion exitosa con el servidor"
+    })
 
-print(f"--- SERVIDOR DE ARCHIVOS INICIADO ---")
-print(f"Acceso local: http://localhost:{PORT}")
-print(f"Acceso desde otros dispositivos: http://{ip_actual}:{PORT}")
-print(f"--------------------------------------")
-print("Presiona CTRL+C para detener el servidor.")
-
-with socketserver.TCPServer(("", PORT), Handler) as httpd:
-    httpd.serve_forever()
+if __name__ == '__main__':
+    # Escucha en todas las IPs en el puerto 5000
+    app.run(host='0.0.0.0', port=5000)
