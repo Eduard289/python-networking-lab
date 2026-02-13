@@ -66,3 +66,12 @@ Filtro de Seguridad (Gatekeeper): Lógica de interrupción para archivos ejecuta
 Auto-Healing Script: Sistema de reintento automático para conexiones perdidas entre el VPS y el cliente local.
 
 Este proyecto se distribuye bajo la Licencia MIT. Consulte el archivo LICENSE para más detalles.
+
+#Interfaz Gráfica# 
+Este repositorio es compatible con Streamlit. Para lanzar el Dashboard visual, deberías:
+
+Instala Streamlit: pip install streamlit
+
+Ejecuta la app: streamlit run app.py
+
+Utilidad: Permite acceder desde tu movil a todo el contenido del pc (ver, consultar, transferir archivos sin cables y en la distacia. Permite, además,  gestionar el servidor de archivos y monitorizar el tráfico de datos desde cualquier smartphone conectado a la red.
